@@ -4,7 +4,7 @@ An interactive R Shiny application for applying [**PhyloThin**](https://github.c
 
 The application helps users inspect an original phylogenetic tree, identify genomes selected for removal, explore the reduced tree, visualize cluster assignments, and download the generated results.
 
-> **Note:** The current application interface is written in German. An English version will be provided in future. 
+> **Note:** This application is currently under active development. Some features may be incomplete, change without notice, or not yet work as expected. The current application interface is written in German. An English version will be provided in future. 
 
 ---
 
