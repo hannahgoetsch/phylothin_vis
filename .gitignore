@@ -1,0 +1,19 @@
+# R and RStudio
+.Rhistory
+.RData
+.Ruserdata
+.Rproj.user/
+
+# Runtime input and output
+phylothin_input/
+phylothinoutput/
+
+# Temporary files
+*.tmp
+*.log
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+
