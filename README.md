@@ -12,7 +12,7 @@ The application helps users inspect an original phylogenetic tree, identify geno
 
 The application is hosted on Posit Connect Cloud:
 
-**[Open the PhyloThin Shiny App](CONNECT_CLOUD_APP_URL)**
+**[Open the PhyloThin Shiny App](https://hannahgoetsch-phylothin-vis.share.connect.posit.cloud/)**
 
 No local installation is required to use the hosted version.
 
