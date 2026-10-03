@@ -7,7 +7,7 @@ library(ape)
 
 # Beispielbaum
 
-base_path <- "/home/hannah/Schreibtisch/PhyloThin/oversampling_correction/shiny" # "C:/JLU/Bachelorarbeit Material"
+base_path <- normalizePath(getwd(), mustWork = TRUE)
 
 example_tree <- file.path(base_path, "ListeriaMonocytogenes.nwk")
 example_removed <- file.path(base_path, "removed_ids_ListeriaMonocytogenes.txt")
@@ -104,7 +104,7 @@ ui <- fluidPage(
       br(), br(),
       downloadButton("download_removed", "Removed IDs herunterladen"),
       br(), br(),
-      downloadButton("download_clades", "Clades herunterladen")
+      downloadButton("download_clades", "Clusters herunterladen")
     ),
     
     mainPanel(
@@ -112,11 +112,11 @@ ui <- fluidPage(
         tabPanel("Originalbaum", plotOutput("originalPlot", height = "1000px")),
         tabPanel("Markierte Tips", plotOutput("markedPlot", height = "1000px")),
         tabPanel("Reduzierter Baum", plotOutput("reducedPlot", height = "1000px")),
-        tabPanel("Alle Clades", plotOutput("cladePlot", height = "1000px")),
-        tabPanel("Große Clades", plotOutput("bigCladePlot", height = "1000px")),
+        tabPanel("Alle Clusters", plotOutput("cladePlot", height = "1000px")),
+        tabPanel("Große Clusters", plotOutput("bigCladePlot", height = "1000px")),
         tabPanel("Statistik", tableOutput("statsTable")),
         tabPanel("Vergleich", tableOutput("compareTable")),
-        tabPanel("Clade-Größen", plotOutput("cladeSizePlot", height = "700px"))
+        tabPanel("Cluster-Größen", plotOutput("cladeSizePlot", height = "700px"))
       )
     )
   )
@@ -282,7 +282,7 @@ server <- function(input, output, session) {
           reduced(drop.tip(tr, removed()))
         }
         
-        incProgress(0.10, detail = "Clades werden geladen...")
+        incProgress(0.10, detail = "Clusters werden geladen...")
         
 
         # Clades laden
@@ -301,7 +301,7 @@ server <- function(input, output, session) {
         } else {
           
           showNotification(
-            "Keine Clades-Datei gefunden. Clade-Plots können nicht angezeigt werden.",
+            "Keine Clusters-Datei gefunden. Cluster-Plots können nicht angezeigt werden.",
             type = "warning"
           )
           
@@ -439,7 +439,7 @@ server <- function(input, output, session) {
       tr,
       tip.color = tip_cols,
       cex = 0.5,
-      main = "Baum mit allen Clades"
+      main = "Baum mit allen Clusters"
     )
     
     legend(
@@ -502,14 +502,14 @@ server <- function(input, output, session) {
       tr,
       tip.color = tip_cols2,
       cex = 0.5,
-      main = "Große Clades"
+      main = "Große Clusters"
     )
     
     keep <- legend_labels2 != "rest"
     
     legend(
       "topright",
-      legend = c(legend_labels2[keep], "Die restlichen Clades"),
+      legend = c(legend_labels2[keep], "Die restlichen Clusters"),
       col = c(cols2[keep], "grey70"),
       pch = 19,
       bty = "n",
@@ -558,8 +558,8 @@ server <- function(input, output, session) {
         "Anzahl entfernte Genome",
         "Anzahl Genome im reduzierten Baum",
         "Reduktionsrate in %",
-        "Anzahl berechneter Clades",
-        "Genome ohne Clade-Zuordnung"
+        "Anzahl berechneter Clusters",
+        "Genome ohne Cluster-Zuordnung"
       ),
       Wert = c(
         original_n,
@@ -608,8 +608,8 @@ server <- function(input, output, session) {
       tab,
       las = 2,
       cex.names = 0.7,
-      main = "Größe der Clades",
-      xlab = "Clade",
+      main = "Größe der Clusters",
+      xlab = "Cluster",
       ylab = "Anzahl Genome"
     )
   })
